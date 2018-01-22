@@ -6,9 +6,9 @@ import java.awt.*;
 /**
  * Created by Administrator on 2018/1/22.
  */
-public class MovingSpriteEx extends JFrame {
+public class ShootingMissilesEx extends JFrame {
 
-	public MovingSpriteEx() {
+	public ShootingMissilesEx() {
 
 		initUI();
 	}
@@ -20,7 +20,7 @@ public class MovingSpriteEx extends JFrame {
 		setSize(400, 300);
 		setResizable(false);
 
-		setTitle("Moving sprite");
+		setTitle("Shooting missiles");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -31,7 +31,7 @@ public class MovingSpriteEx extends JFrame {
 			@Override
 			public void run() {
 
-				MovingSpriteEx ex = new MovingSpriteEx();
+				ShootingMissilesEx ex = new ShootingMissilesEx();
 				ex.setVisible(true);
 			}
 		});
