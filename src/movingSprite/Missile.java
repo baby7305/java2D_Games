@@ -20,13 +20,11 @@ public class Missile extends Sprite {
 		getImageDimensions();
 	}
 
-
 	public void move() {
 
 		x += MISSILE_SPEED;
 
-		if (x > BOARD_WIDTH) {
+		if (x > BOARD_WIDTH)
 			vis = false;
-		}
 	}
 }

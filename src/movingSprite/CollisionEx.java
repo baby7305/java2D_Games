@@ -6,9 +6,9 @@ import java.awt.*;
 /**
  * Created by Administrator on 2018/1/22.
  */
-public class ShootingMissilesEx extends JFrame {
+public class CollisionEx extends JFrame {
 
-	public ShootingMissilesEx() {
+	public CollisionEx() {
 
 		initUI();
 	}
@@ -17,10 +17,10 @@ public class ShootingMissilesEx extends JFrame {
 
 		add(new Board());
 
-		setSize(400, 300);
 		setResizable(false);
+		pack();
 
-		setTitle("Shooting missiles");
+		setTitle("Collision");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -30,8 +30,7 @@ public class ShootingMissilesEx extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-
-				ShootingMissilesEx ex = new ShootingMissilesEx();
+				CollisionEx ex = new CollisionEx();
 				ex.setVisible(true);
 			}
 		});
