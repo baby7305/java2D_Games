@@ -6,15 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2018/1/22.
  */
 public class Board extends JPanel implements ActionListener {
 
+	private final int ICRAFT_X = 40;
+	private final int ICRAFT_Y = 60;
+	private final int DELAY = 10;
 	private Timer timer;
 	private Craft craft;
-	private final int DELAY = 10;
 
 	public Board() {
 
@@ -26,13 +29,13 @@ public class Board extends JPanel implements ActionListener {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
 		setBackground(Color.BLACK);
+		setDoubleBuffered(true);
 
-		craft = new Craft();
+		craft = new Craft(ICRAFT_X, ICRAFT_Y);
 
 		timer = new Timer(DELAY, this);
 		timer.start();
 	}
-
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -46,14 +49,48 @@ public class Board extends JPanel implements ActionListener {
 	private void doDrawing(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(craft.getImage(), craft.getX(), craft.getY(), this);
+		g2d.drawImage(craft.getImage(), craft.getX(),
+				craft.getY(), this);
+
+		ArrayList ms = craft.getMissiles();
+
+		for (Object m1 : ms) {
+			Missile m = (Missile) m1;
+			g2d.drawImage(m.getImage(), m.getX(),
+					m.getY(), this);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		craft.move();
+		updateMissiles();
+		updateCraft();
+
 		repaint();
+	}
+
+	private void updateMissiles() {
+
+		ArrayList ms = craft.getMissiles();
+
+		for (int i = 0; i < ms.size(); i++) {
+
+			Missile m = (Missile) ms.get(i);
+
+			if (m.isVisible()) {
+
+				m.move();
+			} else {
+
+				ms.remove(i);
+			}
+		}
+	}
+
+	private void updateCraft() {
+
+		craft.move();
 	}
 
 	private class TAdapter extends KeyAdapter {
